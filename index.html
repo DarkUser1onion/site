@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>aircrack :: handshake</title>
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="cap">
+        <div class="capper">user@arch ~❯ sudo airodump-ng wlan0</div>
+        <div class="nav">
+            <span class="nav-btn active">[ТЕОРИЯ]</span>
+            <span class="nav-btn">[ПРАКТИКА]</span>
+            <span class="nav-btn">[ИНСТРУМЕНТЫ]</span>
+        </div>
+    </div>
+
+    <main>
+        <h1>Aircrack-ng - монстр в мире Линукс, для взлома любой wifi</h1>
+        <h2>WPA2 4-Way Handshake: единственное, что нужно для офлайн‑брута</h2>
+
+        <div class="section">
+            <p>Wi‑Fi с защитой WPA2 <strong>не передаёт пароль по воздуху</strong>. Вместо этого клиент и точка доступа выполняют <span class="highlight">четырёхэтапное рукопожатие (4‑way handshake)</span>. Это обмен четырьмя сообщениями, который происходит при подключении устройства к сети. Даже если пароль сложный, сам процесс рукопожатия всегда одинаков - и именно его достаточно для офлайн‑перебора.</p>
+            <p>В этих пакетах содержатся:</p>
+            <ul>
+                <li><span class="accent">PMK</span> (Pairwise Master Key) - не передаётся напрямую, но вычисляется из пароля и SSID. Именно её хэш участвует в проверке.</li>
+                <li><span class="accent">ANonce</span> - случайное число, сгенерированное точкой доступа.</li>
+                <li><span class="accent">SNonce</span> - случайное число, сгенерированное клиентом.</li>
+                <li><span class="accent">MIC</span> (Message Integrity Code) - код целостности, который вычисляется на основе PMK и всех параметров сообщения. Если мы перехватили MIC, мы можем проверить любой пароль, вычислив свой MIC и сравнив.</li>
+            </ul>
+            <p>Все эти данные передаются в открытом виде (кроме MIC, но он вычисляется из пароля). Злоумышленник, который находится в радиусе действия сети и <strong class="highlight">перехватит четыре пакета рукопожатия</strong>, получает всё необходимое для офлайн‑брутфорса. Ему не нужно оставаться рядом с точкой - он уходит домой и перебирает пароли на своём ПК или даже арендует облачные мощности.</p>
+            <p><strong>Aircrack-ng</strong> - одна из старейших и самых популярных утилит для таких задач. Она умеет вытаскивать handshake из захваченного .cap-файла и проверять сотни паролей в секунду. В связке с хорошим словарём (rockyou.txt, SecLists, собственные генераторы) это даёт результат за минуты.</p>
+            <p style="margin-top: 25px;">Важно понимать: сама уязвимость не в WPA2, а в коротких или предсказуемых паролях. Захват handshake возможен только если клиент уже подключён или подключится принудительно (деаутентификация). Об этом - на вкладке «Практика».</p>
+        </div>
+
+        <div class="ascii-box">
+            <pre>
+                [ТОЧКА ДОСТУПА]                               [КЛИЕНТ]
+                      |                                            |
+                      |-------------- ANonce --------------------->|
+                      |                                            |
+                      |&lt;------------- SNonce + MIC ----------------|
+                      |                                            |
+                      |-------------- GTK + MIC ------------------>|
+                      |                                            |
+                      |&lt;----------------- ACK ---------------------|
+            </pre>
+            <p class="note">* <span class="accent-cyan">Бирюзовым</span> выделены пакеты, которые необходимо сохранить. Именно в них содержится MIC, привязанный к паролю.</p>
+        </div>
+
+        <div class="terminal-block">
+            <div class="terminal">
+                <span class="cmd"># airodump-ng wlan0mon</span><br>
+                <br>
+ BSSID              PWR  Beacons    #Data  #/s  CH  MB   ENC  CIPHER AUTH ESSID<br>
+ <span class="bssid">00:1A:2B:3C:4D:5E</span>  -45      123       42    0   6  54e  WPA2 CCMP   PSK  HomeNetwork<br>
+ <br>
+ BSSID              STATION            PWR  Rate  Lost  Frames  Probe<br>
+ <span class="bssid">00:1A:2B:3C:4D:5E</span>  <span class="station">AA:BB:CC:DD:EE:FF</span>  -51   1e-1e    0      2<br>
+ <br>
+ <span class="handshake">[WPA Handshake: 00:1A:2B:3C:4D:5E]</span>
+            </div>
+            <p class="terminal-caption">⏺ Захвачен handshake - можно запускать aircrack-ng с словарём.</p>
+            <p class="terminal-example">user@arch ~❯ aircrack-ng capture-01.cap -w /usr/share/wordlists/rockyou.txt</p>
+        </div>
+
+        <div class="disclaimer">
+            Вся информация предоставлена исключительно в образовательных целях. 
+            Используйте полученные знания только для тестирования собственных сетей 
+            или с явного письменного разрешения владельца. Автор не несёт ответственности 
+            за неправомерное использование материалов.
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-nav">
+            <a href="#">ТЕОРИЯ</a>
+            <a href="#">ПРАКТИКА</a>
+            <a href="#">ИНСТРУМЕНТЫ</a>
+        </div>
+        <p>© 2026 / aircrack-handshake</p>
+    </footer>
+</body>
+</html>
