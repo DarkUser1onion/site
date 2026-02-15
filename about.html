@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aircrack :: О проекте</title>
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="images/aircrack-ng_ico.svg">
+</head>
+<body>
+    <div class="cap">
+        <div class="capper">user@arch ~❯ whoami</div>
+        <div class="nav">
+            <a href="index.html" class="nav-btn">[ТЕОРИЯ]</a>
+            <a href="practice.html" class="nav-btn">[ПРАКТИКА]</a>
+            <a href="about.html" class="nav-btn" style="color: var(--pink);animation: soft-text-pulse 2.5s infinite ease-in-out;">[О ПРОЕКТЕ]</a>
+            <a href="contacts.html" class="nav-btn">[КОНТАКТЫ]</a>
+        </div>
+    </div>
+
+    <main>
+        <h1>🛈 ОБ ЭТОМ САЙТЕ 🛈</h1>
+        <h2>Проект создан для изучения WPA2 handshake</h2>
+
+        <section class="section">
+            <p>Этот сайт - учебный проект по курсу HTML5 + CSS3. Тема: этичный хакинг, инструмент Aircrack-ng.</p>
+            <p>Здесь ты найдёшь теорию, практические примеры и полезные ссылки о том, как эффективно ломать сети.</p>
+        </section>
+
+        <h2>Основные инструменты</h2>
+        <div class="grid-container">
+            <div class="grid-item">
+                <span class="cmd">airodump-ng</span>
+                <p>Захват пакетов, поиск сетей</p>
+            </div>
+            <div class="grid-item">
+                <span class="cmd">aireplay-ng</span>
+                <p>Деаутентификация, инъекции</p>
+            </div>
+            <div class="grid-item">
+                <span class="cmd">aircrack-ng</span>
+                <p>Взлом через словарь</p>
+            </div>
+            <div class="grid-item">
+                <span class="cmd">hashcat</span>
+                <p>GPU-брутфорс</p>
+            </div>
+        </div>
+
+        <h2>Поддерживаемые Wi-Fi чипсеты</h2>
+        <table class="cyber-table">
+            <thead>
+                <tr><th>Чипсет</th><th>Режим монитора</th><th>Инъекции</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Atheros AR9271</td><td>✔</td><td>✔</td></tr>
+                <tr><td>Ralink RT3070</td><td>✔</td><td>✔</td></tr>
+                <tr><td>Realtek RTL8812AU</td><td>✔</td><td>✔</td></tr>
+                <tr><td>Intel (большинство)</td><td>✘</td><td>✘</td></tr>
+            </tbody>
+        </table>
+        <div class="photo-grid">
+            <div class="photo-card">
+                <img class="photo" src="images/ar9271.png" alt="AR9271">
+                <br><a href="https://aliexpress.ru/item/4001100317465.html?sku_id=10000014396761339" class="submit-btn">Лучший выбор</a><br><br>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-nav">
+            <a href="index.html">ТЕОРИЯ</a>
+            <a href="practice.html">ПРАКТИКА</a>
+            <a href="about.html">О ПРОЕКТЕ</a>
+            <a href="contacts.html">КОНТАКТЫ</a>
+        </div>
+        <p>© 2026 / aircrack-handshake</p>
+    </footer>
+</body>
+</html>

