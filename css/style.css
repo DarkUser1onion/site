@@ -79,7 +79,7 @@ body::before {
     background: none;
     border: none;
     color: var(--cyan);
-    font-family: 'Fira Code', 'Share Tech Mono', monospace;
+    font-family: 'Fira Code', 'Share Tech Mono'q, monospace;
     font-size: 1.2rem;
     padding: 8px 16px;
     text-decoration: none;
@@ -247,7 +247,7 @@ pre {
 
 @keyframes soft-text-pulse {
     0% { text-shadow: 0 0 1px var(--pink), 0 0 2px var(--pink); }
-    50% { text-shadow: 0 0 3px var(--pink), 0 0 4px var(--pink); }
+    50% { text-shadow: 0 0 2px var(--pink), 0 0 3px var(--pink); }
     100% { text-shadow: 0 0 1px var(--pink), 0 0 2px var(--pink); }
 }
 
@@ -682,7 +682,49 @@ footer {
 
 @media (max-width: 380px) {
     .logo {
-        font-size: 1px;
+        font-size: 5px;
+    }
+}
+
+@media (max-width: 420px) {
+    .logo {
+        font-size: 6px;
+    }
+}
+
+@media (max-width: 391px) {
+    .logo {
+        font-size: 5px;
+    }
+}
+@media (max-width: 431px) {
+    .logo {
+        font-size: 6px;
+    }
+}
+@media (max-width: 361px) {
+    .logo {
+        font-size: 5px;
+    }
+}
+@media (max-width: 769px) {
+    .logo {
+        font-size: 12px;
+    }
+}
+@media (max-width: 541px) {
+    .logo {
+        font-size: 8px;
+    }
+}
+@media (max-width: 345px) {
+    .logo {
+        font-size: 4px;
+    }
+}
+@media (max-width: 413px) {
+    .logo {
+        font-size: 6px;
     }
 }
 
@@ -749,4 +791,17 @@ footer {
 }
 .cmd-comment .yellow {
     color: var(--yellow);
+}
+
+
+/*Тут фикс шрифта segoe-ui*/
+@font-face{
+    font-family: 'wf_SegoeUILight';
+    src:url('http://i.s-microsoft.com/fonts/Segoe-UI/Cyrillic/Light/latest.eot');
+    src:url('http://i.s-microsoft.com/fonts/Segoe-UI/Cyrillic/Light/latest.eot?#iefix') format('embedded-opentype'),
+           url('http://i.s-microsoft.com/fonts/Segoe-UI/Cyrillic/Light/latest.woff') format('woff'),
+           url('http://i.s-microsoft.com/fonts/Segoe-UI/Cyrillic/Light/latest.ttf') format('truetype'),
+           url('http://i.s-microsoft.com/fonts/Segoe-UI/Cyrillic/Light/latest.svg#web') format('svg');
+    font-weight: normal;
+    font-style: normal;
 }
