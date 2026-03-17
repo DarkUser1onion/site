@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aircrack :: Handshake</title>
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="images/aircrack-ng_ico.svg">
+</head>
+<body>
+    <div class="cap">
+        <div class="capper">user@arch ~❯ shop --list</div>
+        <div class="nav">
+            <a href="index.html" class="nav-btn">[ТЕОРИЯ]</a>
+            <a href="practice.html" class="nav-btn">[ПРАКТИКА]</a>
+            <a href="about.html" class="nav-btn">[О ПРОЕКТЕ]</a>
+            <a href="contacts.html" class="nav-btn">[КОНТАКТЫ]</a>
+            <a href="shop.html" class="nav-btn">[МАГАЗИН]</a>
+        </div>
+        <div class="cart-counter">
+            Товаров <span id="cart-count">0</span>
+        </div>
+    </div>
+    
+    <div class="filters">
+        <button class="filter-btn active" data-filter="all">Все</button>
+        <button class="filter-btn" data-filter="adapter">Адаптеры</button>
+        <button class="filter-btn" data-filter="book">Книги</button>
+        <button class="filter-btn" data-filter="merch">Мерч</button>
+    </div>
+    
+    <div id="products-grid" class="products-grid"></div>
+    
+    <div id="cart-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Корзина</h2>
+            <div id="cart-items"></div>
+            <div id="cart-total">Итого: 0 ₽</div>
+            <button id="checkout-btn">Оформить</button>
+        </div>
+    </div>
+    
+    <div id="cart-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Корзина</h2>
+            <div id="cart-items"></div>
+            <div id="cart-total">Итого: 0 ₽</div>
+            <button id="checkout-btn">Оформить</button>
+        </div>
+    </div>
+
+    <div id="product-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modal-product-detail"></div>
+        </div>
+    </div>
+
+    <div class="cart-counter" id="cart-icon">
+    Товаров <span id="cart-count">0</span>
+    </div>
+
+
+    <script src="script.js"></script>
+</body>
+</html>
