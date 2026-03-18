@@ -16,18 +16,17 @@
             <a href="practice.html" class="nav-btn">[ПРАКТИКА]</a>
             <a href="about.html" class="nav-btn">[О ПРОЕКТЕ]</a>
             <a href="contacts.html" class="nav-btn">[КОНТАКТЫ]</a>
-            <a href="shop.html" class="nav-btn">[МАГАЗИН]</a>
-        </div>
-        <div class="cart-counter">
-            Товаров <span id="cart-count">0</span>
+            <a href="#" class="nav-btn" id="cart-trigger" style="color: var(--pink);">
+                [МАГАЗИН <span style="color: var(--cyan);">🨁</span><span id="cart-count" style="color: var(--cyan);">0</span>]
+            </a>
         </div>
     </div>
     
     <div class="filters">
-        <button class="filter-btn active" data-filter="all">Все</button>
-        <button class="filter-btn" data-filter="adapter">Адаптеры</button>
-        <button class="filter-btn" data-filter="book">Книги</button>
-        <button class="filter-btn" data-filter="merch">Мерч</button>
+        <button class="submit-btn" data-filter="all">Все</button>
+        <button class="submit-btn" data-filter="adapter">Адаптеры</button>
+        <button class="submit-btn" data-filter="book">Книги</button>
+        <button class="submit-btn" data-filter="merch">Мерч</button>
     </div>
     
     <div id="products-grid" class="products-grid"></div>
@@ -38,7 +37,7 @@
             <h2>Корзина</h2>
             <div id="cart-items"></div>
             <div id="cart-total">Итого: 0 ₽</div>
-            <button id="checkout-btn">Оформить</button>
+            <button class="submit-btn">Оформить</button>
         </div>
     </div>
     
@@ -48,7 +47,7 @@
             <h2>Корзина</h2>
             <div id="cart-items"></div>
             <div id="cart-total">Итого: 0 ₽</div>
-            <button id="checkout-btn">Оформить</button>
+            <button class="submit-btn">Оформить</button>
         </div>
     </div>
 
@@ -59,10 +58,16 @@
         </div>
     </div>
 
-    <div class="cart-counter" id="cart-icon">
-    Товаров <span id="cart-count">0</span>
-    </div>
-
+    <footer>
+        <div class="footer-nav">
+            <a href="index.html">ТЕОРИЯ</a>
+            <a href="practice.html">ПРАКТИКА</a>
+            <a href="about.html">О ПРОЕКТЕ</a>
+            <a href="contacts.html">КОНТАКТЫ</a>
+            <a href="shop.html">Магазин</a>
+        </div>
+        <p>© 2026 / aircrack-handshake</p>
+    </footer>
 
     <script src="script.js"></script>
 </body>
