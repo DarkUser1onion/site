@@ -1,6 +1,3 @@
-import products from './product.js'
-import {renderProducts, renderCartModal} from './renders.js'
-
 let cart = {};
 
 if (localStorage.getItem('cart'))

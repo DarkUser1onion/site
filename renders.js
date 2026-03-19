@@ -1,7 +1,4 @@
-import products from './product.js'
-import { updateCartCounter, saveCart, addToCart, removeFromCart, changeQuantity, openProductModal, closeAllModals,  } from './script.js'
-
-function renderProducts(filter = 'all')
+export function renderProducts(filter = 'all')
 {
     if (!productsGrid) return;
         productsGrid.innerHTML = '';
@@ -25,7 +22,7 @@ function renderProducts(filter = 'all')
     });
 }
 
-function renderCartModal()
+export function renderCartModal()
 {
     if (!cartItemsContainer || !cartTotalSpan) return;
     cartItemsContainer.innerHTML = '';
