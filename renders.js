@@ -1,7 +1,7 @@
-export function renderProducts(filter = 'all')
+export function renderProducts(products, container, filter = 'all')
 {
-    if (!productsGrid) return;
-        productsGrid.innerHTML = '';
+    if (!container) return;
+    container.innerHTML = '';
 
     const filtered = filter === 'all' 
         ? products 
@@ -18,21 +18,20 @@ export function renderProducts(filter = 'all')
             <p class="product-sku">Арт: ${product.sku}</p>
             <button class="add-to-cart-btn submit-btn">[ В КОРЗИНУ ]</button>
         `;
-        productsGrid.appendChild(card);
+        container.appendChild(card);
     });
 }
 
-export function renderCartModal()
+export function renderCartModal(cart, products, container, totalSpan)
 {
-    if (!cartItemsContainer || !cartTotalSpan) return;
-    cartItemsContainer.innerHTML = '';
+    if (!container || !totalSpan) return;
+    container.innerHTML = '';
     let total = 0;
 
     for (const productId in cart)
     {
         const product = products.find(p => p.id == productId);
-        if (!product)
-            continue; // на случай, если товар удалён из каталога
+        if (!product) continue;
 
         const item = cart[productId];
         const itemTotal = product.price * item.quantity;
@@ -50,8 +49,8 @@ export function renderCartModal()
                 <button class="cart-remove submit-btn" data-id="${productId}">Удалить</button>
             </div>
         `;
-        cartItemsContainer.appendChild(row);
+        container.appendChild(row);
     }
 
-    cartTotalSpan.textContent = `Итого: ${total} ₽`;
+    totalSpan.textContent = `Итого: ${total} ₽`;
 }

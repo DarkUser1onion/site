@@ -1,3 +1,6 @@
+import { products } from "./product.js";
+import { renderProducts, renderCartModal} from "./renders.js";
+
 let cart = {};
 
 if (localStorage.getItem('cart'))
@@ -22,7 +25,7 @@ function saveCart()
     localStorage.setItem('cart', JSON.stringify(cart));
     updateCartCounter();
     if (cartModal.style.display === 'block')
-        renderCartModal();
+        renderCartModal(cart, products, cartItemsContainer, cartTotalSpan);
 }
 
 function addToCart(productId)
@@ -82,7 +85,7 @@ filterButtons.forEach(btn => {
     btn.addEventListener('click', () => {
         filterButtons.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        renderProducts(btn.dataset.filter);
+        renderProducts(products, productsGrid, btn.dataset.filter);;
     });
 });
 
@@ -113,7 +116,7 @@ if (cartTrigger)
 {
     cartTrigger.addEventListener('click', (e) => {
         e.preventDefault();
-        renderCartModal();
+        renderCartModal(cart, products, cartItemsContainer, cartTotalSpan);
         if (cartModal)
             cartModal.style.display = 'block';
     });
@@ -185,7 +188,7 @@ if (checkoutBtn) {
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    renderProducts('all');
+    renderProducts(products, productsGrid, 'all');
     updateCartCounter();
 
     if (filterButtons.length) {
